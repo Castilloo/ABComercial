@@ -1,9 +1,12 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
 from routes.vehicle import vehicle_router
 from routes.auth import auth_router
+
+load_dotenv()
 
 app = FastAPI(
     title="API Vehiculos",
@@ -28,7 +31,7 @@ if __name__ == "__main__":
 
 origins = [
     "http://localhost:4200",
-    "https://castilloo.github.io/Client-ABComercial"
+    os.getenv("CLIENT_URL", "")
 ]
 
 app.add_middleware(
